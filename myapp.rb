@@ -1,7 +1,12 @@
-#myapp.rb 
+#app for sinatra method
 require 'sinatra'
 require 'haml'
+require 'erb'
 require "sinatra/reloader"
+
+set :views, File.dirname(__FILE__) + '/views'
+set :foo, 'bar'
+set :baz, Proc.new{"Hello " + foo}
 
 def auto_reload_ignores
     [/db.*/, /config.yaml/, /log.*/, /tmp.*/]
@@ -23,21 +28,26 @@ get '/hello/:name' do
 	"Hello #{params[:name]}!"
 end 
 
-set :foo, 'bar'
-set :baz, Proc.new{"Hello " + foo}
-
 get '/baz' do
 	"baz is set to " + settings.baz
 end
 
-get '/' do
+get '/hello' do
 	haml '%h1 Hello World'
+end
+
+get '/post' do
+ erb :post 
 end
 
 not_found do 
 	'this is nowhere to be found'
 end
 
-post '/hello' do
-  'create somthing'
+post '/' do
+  haml "%h1 hello,#{params[:user]}"
+end
+
+put '/' do
+   
 end
