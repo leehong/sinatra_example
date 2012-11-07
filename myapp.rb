@@ -2,7 +2,8 @@
 require 'sinatra'
 require 'haml'
 require 'erb'
-require "sinatra/reloader"
+require 'sinatra/reloader'
+require 'sequel'
 
 set :views, File.dirname(__FILE__) + '/views'
 set :foo, 'bar'
@@ -12,8 +13,9 @@ def auto_reload_ignores
     [/db.*/, /config.yaml/, /log.*/, /tmp.*/]
 end
 
-
 set(:probability) { |value| condition { rand <= value } }
+
+DB= Sequel.connect('mysql2://root:admaster@localhost:3360/item')
 
 get '/win_a_car', :probability => 0.1 do
   "You won!"
@@ -48,6 +50,7 @@ post '/' do
   haml "%h1 hello,#{params[:user]}"
 end
 
-put '/' do
-   
+get '/find' do
+   @item=DB.dataset.from('items')
+   haml @item
 end
