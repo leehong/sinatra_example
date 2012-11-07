@@ -1,6 +1,12 @@
 #myapp.rb 
 require 'sinatra'
 require 'haml'
+require "sinatra/reloader"
+
+def auto_reload_ignores
+    [/db.*/, /config.yaml/, /log.*/, /tmp.*/]
+end
+
 
 set(:probability) { |value| condition { rand <= value } }
 
@@ -30,4 +36,8 @@ end
 
 not_found do 
 	'this is nowhere to be found'
+end
+
+post '/hello' do
+  'create somthing'
 end
