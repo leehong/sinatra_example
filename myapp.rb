@@ -1,4 +1,5 @@
 #app for sinatra method
+
 require 'sinatra'
 require 'haml'
 require 'erb'
@@ -14,8 +15,6 @@ def auto_reload_ignores
 end
 
 set(:probability) { |value| condition { rand <= value } }
-
-DB= Sequel.connect('mysql2://root:admaster@localhost:3360/item')
 
 get '/win_a_car', :probability => 0.1 do
   "You won!"

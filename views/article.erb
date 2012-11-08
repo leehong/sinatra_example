@@ -1,0 +1,26 @@
+<table>
+  <tr>
+    <td>title </td>  
+    <td>content </td>  
+    <td>date</td>
+    <td>operatiog</td>
+  </tr>
+  <% @articles.each do |article|%>
+  <tr>
+     <td><%=article[:title]%> </td>  
+     <td><%=article[:content]%> </td>  
+     <td><%=article[:date]%></td>
+     <td>
+        <form method='get' action='/show'>
+          <input type="hidden" name="id"  value="<%= article[:id]%>" />
+          <input type="submit" value="update"/> 
+        </form>
+        <form method='post' action='/'>
+          <input type="hidden" name="_method" value='DELETE'>
+          <input type="hidden" name="id"  value="<%= article[:id]%>" />
+          <input type="submit" value="delete"/> 
+        </form>
+     </td>
+  </tr>
+  <% end %>
+</table>
