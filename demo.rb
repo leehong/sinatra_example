@@ -6,7 +6,7 @@ require 'erb'
 require 'sinatra/reloader'
 
 set :views, File.dirname(__FILE__) + '/views'
-DB=Sequel.connect('mysql2://username:password@localhost:3306/blog')
+DB=Sequel.connect('mysql2://sequel:test@localhost:3306/blog')
 
 #this is first create table,
 #DB.create_table :articles do
@@ -18,8 +18,8 @@ DB=Sequel.connect('mysql2://username:password@localhost:3306/blog')
 
 articles = DB[:articles]
 
-get '/' do
- erb :index
+get '/add' do
+ erb :add
 end
 
 post '/' do
@@ -30,7 +30,7 @@ post '/' do
   redirect '/item'
 end
 
-get '/item' do
+get '/' do
    @articles = articles.all
    erb :article
 end

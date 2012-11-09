@@ -10,7 +10,7 @@
      <td><%=article[:title]%> </td>  
      <td><%=article[:content]%> </td>  
      <td><%=article[:date]%></td>
-     <td>
+     <td >
         <form method='get' action='/show'>
           <input type="hidden" name="id"  value="<%= article[:id]%>" />
           <input type="submit" value="update"/> 
@@ -23,4 +23,9 @@
      </td>
   </tr>
   <% end %>
-</table>
+</table></br>
+<div class="add"> 
+  <form method='get' action='/add'>
+     <input type="submit" value="add" /> 
+   </form>
+</div>   
