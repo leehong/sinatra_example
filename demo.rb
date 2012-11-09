@@ -27,7 +27,7 @@ post '/' do
   articles.insert(:title => params[:title],:content => params[:content],
                   :date => time.strftime("%Y-%m-%d %H:%M:%S")
                  )
-  redirect '/item'
+  redirect '/'
 end
 
 get '/' do
@@ -42,12 +42,12 @@ end
 
 put '/' do
    articles.where('id = ?',params[:id]).update(:title => params[:title],:content => params[:content])
-  redirect '/item'
+  redirect '/'
 end
 
 delete '/' do
    articles.where('id = ?', params[:id]).delete
-  redirect '/item'
+   redirect '/'
 end
 
 not_found do
