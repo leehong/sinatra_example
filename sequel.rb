@@ -1,7 +1,7 @@
 require 'sequel'
 #require 'sinatra'
 
-DB = Sequel.connect('mysql2://root:admaster@localhost:3306/item') # memory database
+DB = Sequel.connect('mysql2://username:password@localhost:3306/item') # memory database
 
 DB.create_table :items do
     primary_key :id
