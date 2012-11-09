@@ -1,10 +1,11 @@
 #this is sinatra and sequel demo
 
-require 'sinatra'
+require 'sinatra/base'
 require 'sequel'
 require 'erb'
 require 'sinatra/reloader'
 
+class Demo < Sinatra::Base
   set :views, File.dirname(__FILE__) + '/views'
   DB=Sequel.connect('mysql2://sequel:test@localhost:3306/blog')
 
@@ -30,7 +31,7 @@ require 'sinatra/reloader'
     redirect '/'
   end
 
-  get '/' do
+  get '/index' do
      @articles = articles.all
      erb :article
   end
@@ -57,3 +58,4 @@ require 'sinatra/reloader'
   error 400..510 do
     'some error for you'
   end
+end
