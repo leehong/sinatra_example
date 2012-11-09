@@ -49,3 +49,11 @@ delete '/' do
    articles.where('id = ?', params[:id]).delete
   redirect '/item'
 end
+
+not_found do
+  "this is nothing for you"
+end
+
+error 400..510 do
+  'some error for you'
+end
