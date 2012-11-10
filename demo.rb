@@ -19,7 +19,7 @@ DB=Sequel.connect('mysql2://sequel:test@localhost:3306/blog')
 articles = DB[:articles]
 
 get '/add' do
- erb :add
+  erb :add
 end
 
 post '/' do
@@ -37,12 +37,12 @@ end
 
 get '/show' do
    @article =  articles[:id => params[:id].to_i]
-  erb :update 
+   erb :update 
 end
 
 put '/' do
    articles.where('id = ?',params[:id]).update(:title => params[:title],:content => params[:content])
-  redirect '/'
+   redirect '/'
 end
 
 delete '/' do
