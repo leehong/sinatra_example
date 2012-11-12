@@ -1,5 +1,6 @@
 Dir["./models/*.rb"].each{|model| require model}
 
+class Application
   configure do
    # Sequel.connect('mysql2://sequel:test@localhost:3306/blog')
     set :root, File.dirname(__FILE__)
@@ -12,8 +13,9 @@ Dir["./models/*.rb"].each{|model| require model}
   use Demo
 
   get '/' do
-    #redirect '/index'
-    'hello sinatra'
+    #'Hello World!'
+     redirect to '/index'
   end
 
   #run! if app_file == $0
+end

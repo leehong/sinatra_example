@@ -1,8 +1,4 @@
 #this is sinatra and sequel demo
-
-require 'sinatra/base'
-require 'sequel'
-require 'erb'
 #require 'sinatra/reloader' not to do this, why?
 
 class Demo < Sinatra::Base
