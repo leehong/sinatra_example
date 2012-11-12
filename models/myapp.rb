@@ -1,9 +1,7 @@
 #app for sinatra method
 
 require 'sinatra'
-require 'haml'
 require 'erb'
-require 'sinatra/reloader'
 require 'sequel'
 
 set :views, File.dirname(__FILE__) + '/views'

@@ -1,5 +1,4 @@
 require  'sinatra/base'
-require  './demo.rb'
 
 class Show < Sinatra::Base
     get '/show' do 
@@ -10,7 +9,7 @@ end
 class Test  < Sinatra::Base
    # middleware will run before filters
   use Show
-  use Demo  
+  #use Demo  
 
   get '/' do
     "<a href='/show'>show</a>. <a href='/add'>add</a>"
