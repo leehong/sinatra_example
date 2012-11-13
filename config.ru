@@ -1,7 +1,7 @@
 require 'rubygems'
-require 'bundler/setup'
-require 'sinatra'
-require 'sequel'
-require './application'
+require 'bundler'
+
+Bundler.require
+require './app'
 
 run Sinatra::Application
