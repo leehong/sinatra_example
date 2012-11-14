@@ -2,7 +2,10 @@ require 'rubygems'
 require 'rake'
 
  task :test do
-   ruby "test/test_application.rb"
+  # Dir[File.dirname(__FILE__)+"/test/*.rb"].each do |test|
+  #  ruby test
+  # end
+  ruby "test/test_application.rb"
  end
 
  namespace :db do

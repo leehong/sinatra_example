@@ -1,0 +1,5 @@
+ENV['RACK_ENV'] = 'test'
+require 'rubygems'
+require 'test/unit'
+require 'rack/test'
+require 'sequel'
