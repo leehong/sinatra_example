@@ -7,7 +7,7 @@ require './models/article.rb'
  #set :views, File.dirname(__FILE__) + '/../views'
  #DB=Sequel.connect('mysql2://sequel:test@localhost:3306/blog')
 
-  set :views,File.dirname(__FILE__) + '/views'
+  #set :views,File.dirname(__FILE__) + '/views'
   #this is first create table,
   #DB.create_table :articles do
     #primary_key :id

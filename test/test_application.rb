@@ -25,6 +25,6 @@ class AppTest < Test::Unit:: TestCase
   def test_app_post
     post '/'
     assert_equal last_response.status,302
-    assert last_response.body.include?("welcome")
   end
+  
 end
