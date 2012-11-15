@@ -1,9 +1,10 @@
-#require 'sinatra/base'
 #this is sinatra and sequel demo
 #require 'sinatra/reloader' not to do this, why?
+#require 'sinatra/json'
+require 'sinatra/reloader'
 require './models/article.rb'
 
-#class Demo < Sinatra::Base
+#class App  < Sinatra::Base
  #set :views, File.dirname(__FILE__) + '/../views'
  #DB=Sequel.connect('mysql2://sequel:test@localhost:3306/blog')
 
@@ -16,10 +17,21 @@ require './models/article.rb'
     # Time   :date
   #end
 
-  #articles = DB[:articles]
+ # module Validations
+ #   def valid_id?(id)
+ #    id && id.to_s =~ /^\d+$/
+ #   end
+ # end
 
-  get '/add' do
-    erb :add
+  #articles = DB[:articles]
+ # enable :sessions
+
+  before '/' do
+   redirect '/new' unless Article.count != 0
+  end
+
+  get '/new', :provides => 'html' do
+    erb :new
   end
 
   post '/' do
@@ -27,15 +39,14 @@ require './models/article.rb'
     Article.insert(:title => params[:title],:content => params[:content],
                   :date => time.strftime("%Y-%m-%d %H:%M:%S")
                  )
-    redirect '/'
   end
 
   get '/' do
      @articles = Article.all
-     erb :article
+     erb :index
   end
 
-  get '/show' do
+  get '/update' do
      @article =  Article[:id => params[:id].to_i]
      erb :update 
   end
@@ -50,6 +61,14 @@ require './models/article.rb'
      redirect '/'
   end
 
+ get '/api/:id'  do
+    content_type :json
+
+    @article = Article[:id => params[:id].to_i]
+    tmp = {:id => @article.id,:title => @article.title,:content => @article.content,:date => @article.date}
+    json  :article => tmp.to_json
+ end
+
   not_found do
     'this is nothing for you'
   end
@@ -57,3 +76,4 @@ require './models/article.rb'
   error 400..510 do
     'some error for you'
   end
+#end
