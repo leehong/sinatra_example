@@ -1,9 +1,10 @@
-#require 'sinatra/base'
 #this is sinatra and sequel demo
 #require 'sinatra/reloader' not to do this, why?
+#require 'sinatra/json'
+require 'sinatra/reloader'
 require './models/article.rb'
 
-#class Demo < Sinatra::Base
+#class App  < Sinatra::Base
  #set :views, File.dirname(__FILE__) + '/../views'
  #DB=Sequel.connect('mysql2://sequel:test@localhost:3306/blog')
 
@@ -16,39 +17,59 @@ require './models/article.rb'
     # Time   :date
   #end
 
-  #articles = DB[:articles]
+ # module Validations
+ #   def valid_id?(id)
+ #    id && id.to_s =~ /^\d+$/
+ #   end
+ # end
 
-  get '/add' do
-    erb :add
+  #articles = DB[:articles]
+ # enable :sessions
+  before '/posts' do
+   redirect '/posts/new' unless Article.count != 0
   end
 
-  post '/' do
+  get '/posts/new', :provides => 'html' do
+    erb :new
+  end
+
+  post '/posts' do
     time = Time.new
     Article.insert(:title => params[:title],:content => params[:content],
                   :date => time.strftime("%Y-%m-%d %H:%M:%S")
                  )
-    redirect '/'
+		status 201
+				#redirect '/posts'
   end
 
-  get '/' do
+  get '/posts' do
      @articles = Article.all
-     erb :article
+     erb :index
   end
 
-  get '/show' do
+  get '/posts/update' do
      @article =  Article[:id => params[:id].to_i]
      erb :update 
   end
 
-  put '/' do
+  put '/posts/:id' do
      Article.where('id = ?',params[:id]).update(:title => params[:title],:content => params[:content])
-     redirect '/'
+		status 200
+    # redirect '/posts'
   end
 
-  delete '/' do
+  delete '/posts/:id' do
      Article.where('id = ?', params[:id]).delete
-     redirect '/'
+		 status 204
   end
+
+ get '/api/:id'  do
+    content_type :json
+
+    @article = Article[:id => params[:id].to_i]
+    tmp = {:id => @article.id,:title => @article.title,:content => @article.content,:date => @article.date}
+    json  :article => tmp.to_json
+ end
 
   not_found do
     'this is nothing for you'
@@ -57,3 +78,4 @@ require './models/article.rb'
   error 400..510 do
     'some error for you'
   end
+#end

@@ -1,4 +1,3 @@
-ENV['RACK_ENV'] = 'test'
 require 'test/unit'
 require 'rack/test'
 
@@ -13,18 +12,22 @@ class AppTest < Test::Unit:: TestCase
   end
 
   def test_app_default
-   get '/'
-   assert last_response.ok?
-  end
-
-  def test_app_add
-    get '/add'
-    assert_equal last_response.status,200
+   get '/posts'
+   	assert last_response.ok?
   end
 
   def test_app_post
-    post '/'
-    assert_equal last_response.status,302
+    post '/posts', {:title =>"test", :content => "test content"}
+			assert_equal 201, last_response.status
   end
-  
+
+	def test_app_put
+	 	put '/posts/1',{:title => "hello sinatra", :content => "sdsadsad", :date => "2012-11-19 11:59:41 +0800"}
+   		assert_equal 200, last_response.status
+	end
+
+	def test_app_delete
+		delete '/posts/30'
+		assert_equal 204,last_response.status
+	end
 end
