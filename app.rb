@@ -25,40 +25,42 @@ require './models/article.rb'
 
   #articles = DB[:articles]
  # enable :sessions
-
-  before '/' do
-   redirect '/new' unless Article.count != 0
+  before '/posts' do
+   redirect '/posts/new' unless Article.count != 0
   end
 
-  get '/new', :provides => 'html' do
+  get '/posts/new', :provides => 'html' do
     erb :new
   end
 
-  post '/' do
+  post '/posts' do
     time = Time.new
     Article.insert(:title => params[:title],:content => params[:content],
                   :date => time.strftime("%Y-%m-%d %H:%M:%S")
                  )
+		status 201
+				#redirect '/posts'
   end
 
-  get '/' do
+  get '/posts' do
      @articles = Article.all
      erb :index
   end
 
-  get '/update' do
+  get '/posts/update' do
      @article =  Article[:id => params[:id].to_i]
      erb :update 
   end
 
-  put '/' do
+  put '/posts/:id' do
      Article.where('id = ?',params[:id]).update(:title => params[:title],:content => params[:content])
-     redirect '/'
+		status 200
+    # redirect '/posts'
   end
 
-  delete '/' do
+  delete '/posts/:id' do
      Article.where('id = ?', params[:id]).delete
-     redirect '/'
+		 status 204
   end
 
  get '/api/:id'  do

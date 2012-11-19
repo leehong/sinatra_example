@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'rake'
 
- task :test do
+ task :test  do
   # Dir[File.dirname(__FILE__)+"/test/*.rb"].each do |test|
   #  ruby test
   # end
