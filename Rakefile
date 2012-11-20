@@ -11,5 +11,5 @@ require 'rake'
  namespace :db do
    task :create do
       ruby "create_db.rb"
-     end
    end
+ end
