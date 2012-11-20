@@ -10,6 +10,6 @@ require 'rake'
 
   namespace :db do
     task :create do
-      ruby "create_db.rb"
+      require "create_db.rb"
     end
   end
