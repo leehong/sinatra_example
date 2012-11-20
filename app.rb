@@ -6,7 +6,6 @@ require './models/article.rb'
 
 #class App  < Sinatra::Base
  #set :views, File.dirname(__FILE__) + '/../views'
- #DB=Sequel.connect('mysql2://sequel:test@localhost:3306/blog')
 
   #set :views,File.dirname(__FILE__) + '/views'
   #this is first create table,

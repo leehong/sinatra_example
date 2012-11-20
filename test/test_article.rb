@@ -8,7 +8,9 @@ class TestArticle < Test::Unit::TestCase
     @articles = Article.all
   end
 
-  def test_status_initialized
-    assert_equal @articles.size, 1
+  def test_add_article
+    Article.insert(:title => "hello",:content => "hello sinatra",:date => Time.new)
+    assert_equal 'hello', Article[:title => "hello"].title
   end
+
 end
