@@ -38,8 +38,7 @@ require './models/article.rb'
     Article.insert(:title => params[:title],:content => params[:content],
                   :date => time.strftime("%Y-%m-%d %H:%M:%S")
                  )
-		status 201
-				#redirect '/posts'
+    status 201
   end
 
   get '/posts' do
@@ -54,22 +53,22 @@ require './models/article.rb'
 
   put '/posts/:id' do
      Article.where('id = ?',params[:id]).update(:title => params[:title],:content => params[:content])
-		status 200
+     status 200
     # redirect '/posts'
   end
 
   delete '/posts/:id' do
      Article.where('id = ?', params[:id]).delete
-		 status 204
+     status 204
   end
 
- get '/api/:id'  do
-    content_type :json
+  get '/api/:id'  do
+     content_type :json
 
-    @article = Article[:id => params[:id].to_i]
-    tmp = {:id => @article.id,:title => @article.title,:content => @article.content,:date => @article.date}
-    json  :article => tmp.to_json
- end
+     @article = Article[:id => params[:id].to_i]
+     tmp = {:id => @article.id,:title => @article.title,:content => @article.content,:date => @article.date}
+     json  :article => tmp.to_json
+  end
 
   not_found do
     'this is nothing for you'

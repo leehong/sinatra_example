@@ -1,3 +1,6 @@
+require 'test/unit'
+require 'rack/test'
+require 'sequel'
 require './models/article.rb'
 
 class TestArticle < Test::Unit::TestCase
