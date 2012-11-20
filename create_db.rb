@@ -8,7 +8,7 @@ DB.create_table :articles do
            column      :title,  :varchar
            column      :content,:varchar
            column      :date,   :timestamp
-       end
+           end
 
 DB[:articles] << {:title =>"hello",
                   :content => "this is sinatra project",

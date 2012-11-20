@@ -26,7 +26,7 @@ require './models/article.rb'
   #articles = DB[:articles]
  # enable :sessions
   before '/posts' do
-   redirect '/posts/new' unless Article.count != 0
+    redirect '/posts/new' unless Article.count != 0
   end
 
   get '/posts/new', :provides => 'html' do
@@ -54,7 +54,6 @@ require './models/article.rb'
   put '/posts/:id' do
      Article.where('id = ?',params[:id]).update(:title => params[:title],:content => params[:content])
      status 200
-    # redirect '/posts'
   end
 
   delete '/posts/:id' do
@@ -64,7 +63,6 @@ require './models/article.rb'
 
   get '/api/:id'  do
      content_type :json
-
      @article = Article[:id => params[:id].to_i]
      tmp = {:id => @article.id,:title => @article.title,:content => @article.content,:date => @article.date}
      json  :article => tmp.to_json
