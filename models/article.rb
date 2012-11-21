@@ -1,6 +1,4 @@
-#DB = Sequel.connect("mysql2://sequel:test@localhost:3306/blog")
-DB = Sequel.sqlite 'blog.db'
-class Article < Sequel::Model
+class Article <Sequel::Model
   #set the table name, not used Sequel Model classes
   # Article.set_dataset :articles  
   

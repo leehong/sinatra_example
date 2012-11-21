@@ -1,20 +1,9 @@
-#this is sinatra and sequel demo
-#require 'sinatra/reloader' not to do this, why?
-#require 'sinatra/json'
 require 'sinatra/reloader'
 require './models/article.rb'
 
 #class App  < Sinatra::Base
  #set :views, File.dirname(__FILE__) + '/../views'
-
-  #set :views,File.dirname(__FILE__) + '/views'
-  #this is first create table,
-  #DB.create_table :articles do
-    #primary_key :id
-    #String :title
-    #String :content
-    # Time   :date
-  #end
+ set :root, File.dirname(__FILE__)
 
  # module Validations
  #   def valid_id?(id)
@@ -22,7 +11,6 @@ require './models/article.rb'
  #   end
  # end
 
-  #articles = DB[:articles]
  # enable :sessions
   before '/posts' do
     redirect '/posts/new' unless Article.count != 0
@@ -74,4 +62,3 @@ require './models/article.rb'
   error 400..510 do
     'some error for you'
   end
-#end
