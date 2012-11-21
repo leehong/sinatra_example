@@ -1,12 +1,13 @@
+ENV["RACK_ENV"] = 'test'
 require 'test/unit'
 require 'rack/test'
 require 'sequel'
-require './models/article.rb'
+require './config/boot'
+require './models/article'
 
-ENV["RACK_ENV"] = 'test'
 class TestArticle < Test::Unit::TestCase
   def setup
-    @articles = Article.all
+    Article.destroy
   end
 
   def test_add_article

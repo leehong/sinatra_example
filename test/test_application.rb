@@ -1,4 +1,4 @@
-ENV['RACK_ENV'] ||= "test"
+ENV['RACK_ENV'] ||= 'test'
 require 'test/unit'
 require 'rack/test'
 require './config/boot'
@@ -14,12 +14,12 @@ class AppTest < Test::Unit:: TestCase
   end
 
   def setup
-		Article.delete
+    Article.destroy
   end 
 
   def test_app_default
     get '/posts'
-    assert last_response.ok?
+    assert_equal last_response.ok?
   end
 
   def test_app_post
@@ -28,12 +28,14 @@ class AppTest < Test::Unit:: TestCase
   end
 
   def test_app_put
-    put '/posts/1',{:title => "hello sinatra", :content => "sdsadsad", :date => "2012-11-19 11:59:41 +0800"}
+    Article.insert(:title => "test",:content=>"test app",:date => Time.new)
+    put "/posts/#{Article[:title=>'test'][:id]}",{:title => "test sinatra", :content => "test app put", :date => "2012-11-19 11:59:41 +0800"}
     assert_equal 200, last_response.status
   end
 
   def test_app_delete
-    delete '/posts/30'
+    Article.insert(:title => "test",:content=>"test delete",:date => Time.new)
+    delete "/posts/#{Article[:title=>'test'][:id]}"
     assert_equal 204,last_response.status
   end
 end
