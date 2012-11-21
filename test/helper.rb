@@ -1,0 +1,6 @@
+ENV["RACK_ENV"] = 'test'
+require 'test/unit'
+require 'rack/test'
+require 'sequel'
+require './config/boot'
+require './models/article'

@@ -1,10 +1,4 @@
-ENV["RACK_ENV"] = 'test'
-require 'test/unit'
-require 'rack/test'
-require 'sequel'
-require './config/boot'
-require './models/article'
-
+require './test/helper'
 class TestArticle < Test::Unit::TestCase
   def setup
     Article.destroy

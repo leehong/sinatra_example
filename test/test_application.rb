@@ -1,8 +1,4 @@
-ENV['RACK_ENV'] ||= 'test'
-require 'test/unit'
-require 'rack/test'
-require './config/boot'
-
+require './test/helper'
 OUTER_APP = Rack::Builder.parse_file('config.ru').first
 
 class AppTest < Test::Unit:: TestCase
@@ -19,7 +15,7 @@ class AppTest < Test::Unit:: TestCase
 
   def test_app_default
     get '/posts'
-    assert_equal last_response.ok?
+    assert last_response.ok?
   end
 
   def test_app_post
