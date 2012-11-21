@@ -3,6 +3,7 @@ require 'rack/test'
 require 'sequel'
 require './models/article.rb'
 
+ENV["RACK_ENV"] = 'test'
 class TestArticle < Test::Unit::TestCase
   def setup
     @articles = Article.all

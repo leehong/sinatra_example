@@ -1,5 +1,7 @@
+ENV['RACK_ENV'] ||= "test"
 require 'test/unit'
 require 'rack/test'
+require './config/boot'
 
 OUTER_APP = Rack::Builder.parse_file('config.ru').first
 
@@ -10,6 +12,10 @@ class AppTest < Test::Unit:: TestCase
     OUTER_APP
    # Sinatra::Application
   end
+
+  def setup
+		Article.delete
+  end 
 
   def test_app_default
     get '/posts'
