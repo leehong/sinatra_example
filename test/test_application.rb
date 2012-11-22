@@ -14,6 +14,7 @@ class AppTest < Test::Unit:: TestCase
   end 
 
   def test_app_default
+    Article.insert(:title => "test",:content=>"test app",:date => Time.new)
     get '/posts'
     assert last_response.ok?
   end

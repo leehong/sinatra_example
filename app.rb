@@ -12,9 +12,9 @@ require './models/article.rb'
  # end
 
  # enable :sessions
-  before '/posts' do
-    redirect '/posts/new' unless Article.count != 0
-  end
+ # before '/posts' do
+ #   redirect '/posts/new' unless Article.count != 0
+ # end
 
   get '/posts/new', :provides => 'html' do
     erb :new
@@ -46,13 +46,6 @@ require './models/article.rb'
   delete '/posts/:id' do
      Article.where('id = ?', params[:id]).delete
      status 204
-  end
-
-  get '/api/:id'  do
-     content_type :json
-     @article = Article[:id => params[:id].to_i]
-     tmp = {:id => @article.id,:title => @article.title,:content => @article.content,:date => @article.date}
-     json  :article => tmp.to_json
   end
 
   not_found do
